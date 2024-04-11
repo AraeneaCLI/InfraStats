@@ -10,3 +10,19 @@ Model Evaluation
 ## Predicitons
 
 ## Alerts
+
+## Monitoring Themes
+
+### Computer
+
+CPU
+GPU
+Network
+System
+Memory
+Hard Disk
+
+## Libraries
+
+### psutil
+### GPUtil
