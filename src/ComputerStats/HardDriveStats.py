@@ -21,7 +21,8 @@ def getSize(bytes, suffix = "B"):
 print( "Hard Disk Information\nPartitions and Usage:")  
 # getting all disk partitions on the device  
 the_partitions = psutil.disk_partitions()  
-for the_partition in the_partitions:  
+
+for the_partition in the_partitions:
     print("Device: ", the_partition.device)  
     print("Partition Mount point: ", the_partition.mountpoint)  
     print("Partition File system type: ", the_partition.fstype)  
@@ -34,4 +35,4 @@ for the_partition in the_partitions:
     print("Free hard disk Space", getSize(partitionUsage.free))  
     print("Hard disk Used Percentage: ", partitionUsage.percent, "%")  
     if(partitionUsage.percent > 82):  
-        print("Disk space nearing full")  
+        print("Disk space nearing full")    
