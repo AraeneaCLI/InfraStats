@@ -17,8 +17,7 @@ InfraStat is built to support efficient infrastructure management and performanc
 ---
 
 ### Developed By  
-
-- **Punarv Patidar**  
+  
 - **Yash Mankar**  
 
 ---
