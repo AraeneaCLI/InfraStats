@@ -1,44 +1,36 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Apr 11 13:11:37 2024
-
 @author: AraeneaCLI
 """
 
-import GPUtil  
-  
-the_gpus = GPUtil.getGPUs()  
-  
-gpu_list = []
+import GPUtil
 
-for the_gpu in the_gpus:
-    gpu_id = the_gpu.id
-    gpu_totalmem = the_gpu.memoryTotal
-    gpu_freemem = the_gpu.memoryFree
-    gpu_usage = the_gpu.memoryUsed
-    gpu_usedprop = the_gpu.memoryUtil
-    gpu_temp = the_gpu.temperature
+def get_gpu_stats(threshold_percent=10):
+    """
+    Prints GPU statistics using GPUtil.
+    Alerts if any GPU memory usage exceeds the threshold.
+    """
+    gpus = GPUtil.getGPUs()
+    if not gpus:
+        print("No GPUs detected.")
+        return
 
-THRESHOLDGPU = 10  
+    print("=== GPU Statistics ===")
+    for gpu in gpus:
+        print(f"Name             : {gpu.name}")
+        print(f"ID               : {gpu.id}")
+        print(f"Total Memory     : {gpu.memoryTotal} MB")
+        print(f"Free Memory      : {gpu.memoryFree} MB")
+        print(f"Used Memory      : {gpu.memoryUsed} MB")
+        print(f"Memory Usage     : {gpu.memoryUtil * 100:.2f}%")
+        print(f"Temperature      : {gpu.temperature} °C")
+        
+        if gpu.memoryUtil * 100 > threshold_percent:
+            print(f"⚠️  GPU memory usage is {gpu.memoryUtil * 100:.2f}% "
+                  f"which exceeds the threshold of {threshold_percent}%")
+        print("-" * 40)
 
-while(True): 
-    print(the_gpu.name)   
-    print('gpu.id:', gpu_id)  
-    print ( 'Total GPU:', gpu_totalmem)  
-    print(f"Memory free {gpu_freemem}MB")  
-    print ( 'GPU usage:', gpu_usage)  
-    print ( 'GPU use proportion:', gpu_usedprop* 100)  
-    print(str(gpu_temp) + " C")  
-
-    gpu_list.append([  
-        the_gpu.id,  
-        the_gpu.memoryTotal,  
-        the_gpu.memoryUsed,  
-        the_gpu.memoryUtil * 100  
-        ])  
-
-      
-    for the_gpu in the_gpus:  
-            print(the_gpu.name, ' gpu.id:', the_gpu.id)  
-            if the_gpu.memoryTotal / the_gpu.memoryUsed * 100 > THRESHOLDGPU:  
-                print ( f"GPU memory usage currently is: {the_gpu.memoryUtil * 100}% which exceeds the threshold of {THRESHOLDGPU}%" ) 
+# Optional direct call
+if __name__ == "__main__":
+    get_gpu_stats()
