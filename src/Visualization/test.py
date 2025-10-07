@@ -43,7 +43,7 @@ def animate(i):
     fig.canvas.draw()
 
 # Call the animate function every 100 milliseconds
-ani = animation.FuncAnimation(fig, animate, interval=100)
+ani = animate.FuncAnimation(fig, animate, interval=100)
 
 # Keep the plot alive
 plt.show()
